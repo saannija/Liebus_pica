@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class klienti {
+public class klienti implements Serializable{
 
 	private String vards, tlf, adrese;
 
@@ -33,6 +34,11 @@ public class klienti {
 	public void setAdrese(String adrese) {
 		this.adrese = adrese;
 	}
-	
-
+	public String ierakstit(){
+		return "Klients: "+getVards()+" Nr. "+getTlf()+" Adrese: "+getAdrese();
+	}
+	 @Override
+	    public String toString() {
+	        return new StringBuffer("Klients: "+getVards()+" Nr. "+getTlf()+" Adrese: "+getAdrese()).toString();   
+	 }
 }

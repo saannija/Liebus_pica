@@ -29,6 +29,8 @@ public class picas {
 		this.ceplaiks = ceplaiks;
 	}
 	
-	
+	public String ierakstit(){
+		return getNos()+", cena: "+getCena()+"€, cepsanas laiks: ‎"+getCeplaiks()+"min";
+	}
 
 }
