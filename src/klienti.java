@@ -39,6 +39,6 @@ public class klienti implements Serializable{
 	}
 	 @Override
 	    public String toString() {
-	        return new StringBuffer("Klients: "+getVards()+" Nr. "+getTlf()+" Adrese: "+getAdrese()).toString();   
+	        return "Klients: "+getVards()+" Nr. "+getTlf()+" Adrese: "+getAdrese();   
 	 }
 }

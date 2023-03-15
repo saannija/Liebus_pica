@@ -1,6 +1,11 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.regex.Pattern;
 
@@ -8,19 +13,37 @@ import javax.swing.JOptionPane;
 	
 	public class UI implements pasutijums{
 		
-		static void ierakstit(Object a){
-			 try {
-			FileOutputStream fileOut = new FileOutputStream("ceks.txt");
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(a);
-            objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
- 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+		static void ierakstit(Object klients){
+			try {
+				FileOutputStream f = new FileOutputStream(new File("ceks.txt"));
+				ObjectOutputStream o = new ObjectOutputStream(f);
+
+				// Write objects to file
+			//	o.writeObject(a);
+				o.writeObject(klients);
+
+				o.close();
+				f.close();
+
+				FileInputStream fi = new FileInputStream(new File("ceks.txt"));
+				ObjectInputStream oi = new ObjectInputStream(fi);
+
+				// Read objects
+			//	picas a1 = (picas) oi.readObject();
+				klienti a2 = (klienti) oi.readObject();
+				JOptionPane.showMessageDialog(null, a2.toString());
+				oi.close();
+				fi.close();
+
+			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "Fails nav atrasts","Warning",JOptionPane.WARNING_MESSAGE);
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "Kluda inicializejot stream","Warning",JOptionPane.WARNING_MESSAGE);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
 		}
-		
 		static void nolasit(){
 			String txt, str="";
 			try{
@@ -56,14 +79,14 @@ import javax.swing.JOptionPane;
 		String metodes[]= {"Pasutit","Apskatit cekus","Aizvert"};
 		picas p = null,p1 = null,p2 = null,p3 = null,p4 = null,p5 = null,p6 = null;
 		String pizza[]={"Siera","Tropiska","Studentu","Margarita","Galas","Asa","Peperoni"};
-		String izmers[]= {"Maza","Videja","Liela"};
+		String izmers[]= {"Maza 3.50€‎","Videja 5€‎","Liela 6.50€‎"};
 		String pasutit[]={"Uz vietas","Pasutijums"};
 		String[] adrese={"Ziemelu priekspils.","Karosta","Tosmare",
 				"Zala birze","Jaunliepaja","Vecliepaja","Jauna pasaule",
-				"Dienvdrietumi","Ezerkrasts","Arpus pilsetas"};
-		String piedevas[]={"Siers","Bekons","Ananasi","Jalapeno","Zalumi","Nekas"};
-		String merces[]={"Neviena","BBQ","Ranch","Kecups","Saldskaba","Asa"};
-		
+				"Dienvdrietumi","Ezerkrasts","Arpus pilsetas","Pie veikala"};
+		String piedevas[]={"Neko","Siers 0.5€‎","Bekons 0.75€‎‎","Ananasi 0.75€‎","Jalapeno 0.5€‎","Zalumi 0.5€‎"};
+		String merces[]={"Neko","BBQ","Ranch","Kecups","Saldskaba","Asa"};
+		klienti klients=new klienti("Uz vietas", "20000000", "Pie veikala");
 		
 		/////////////////
 		do{
@@ -73,7 +96,12 @@ import javax.swing.JOptionPane;
 			izvele=JOptionPane.showOptionDialog(null,"Pasutijuma izvele","Izvelies kur edisi",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,pasutit,pasutit[0]);
 			if(izvele==0) {
 				cena=0;
+				
 			}else if(izvele==1) {
+				vards=(String)JOptionPane.showInputDialog(null, "Ievadi pasutitaja vardu: ","Varda ievade",JOptionPane.INFORMATION_MESSAGE);
+				do {
+				tlf=JOptionPane.showInputDialog(null,"Ievadi savu talruna numuru:","Talruna ievade",JOptionPane.INFORMATION_MESSAGE);
+				}while(!Pattern.matches("^[2]{1}[0-9]{7}$", tlf));
 				attalums=JOptionPane.showOptionDialog(null,"Pasutijuma izvele","Izvelies kur edisi",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,adrese,adrese[0]);
 				if(attalums==0||attalums==4||attalums==8) {
 					cena+=attalums+1;
@@ -86,6 +114,7 @@ import javax.swing.JOptionPane;
 				}else{
 					cena+=0;
 				}
+				klients=new klienti(vards,tlf,adrese[(int) attalums]);
 				//cena=+attalums;
 			}
 			izvele=JOptionPane.showOptionDialog(null,"Picas izmera izvele","Izvelies picas izmeru",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,izmers,izmers[0]);
@@ -98,18 +127,26 @@ import javax.swing.JOptionPane;
 			}else{
 				cena+=0;
 			}
-			izvele=JOptionPane.showOptionDialog(null,"Picas piedevu izvele","Izvelies piedevas",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,piedevas,piedevas[0]);
-			if(izvele==5) {
-			}else if(izvele==1||izvele==0||izvele==4) {
-				cena+=0.5;
-			}else if(izvele==2||izvele==3) {
-				cena+=0.75;
-			}else{
-				cena+=0;
-			}
-			izvele=JOptionPane.showOptionDialog(null,"Picas merces izvele","Izvelies merci",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,merces,merces[0]);
-			if(izvele==0) {
-			}else cena+=0.5;
+			do{
+				izvele=JOptionPane.showOptionDialog(null,"Picas piedevu izvele","Izvelies piedevas",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,piedevas,piedevas[0]);
+				if(izvele==0) {
+					cena+=0;
+				}else if(izvele==1||izvele==5||izvele==4) {
+					cena+=0.5;
+				}else if(izvele==2||izvele==3) {
+					cena+=0.75;
+				}else{
+					cena+=0;
+				}
+			}while(izvele!=0);
+			
+			do{
+				izvele=JOptionPane.showOptionDialog(null,"Picas merces izvele 0.5€‎","Izvelies merci",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,merces,merces[0]);
+				if(izvele==0) {
+					cena+=0;
+				}else cena+=0.5;
+			}while(izvele!=0);
+			
 			p=new picas("Siera",cena,5);
 			p1=new picas("Tropiska",cena,4);
 			p2=new picas("Studentu",cena,3);
@@ -119,21 +156,16 @@ import javax.swing.JOptionPane;
 			p6=new picas("Peperoni",cena,9);
 			picas[] pieejamasPicas=new picas[] {p,p1,p2,p3,p4,p5,p6};
 			izvele= JOptionPane.showOptionDialog(null,"Picas izvele","Izvelies picu",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,pizza,pizza[0]);
-			vards=(String)JOptionPane.showInputDialog(null, "Ievadi pasutitaja vardu: ","Varda ievade",JOptionPane.INFORMATION_MESSAGE);
-			do {
-			tlf=JOptionPane.showInputDialog(null,"Ievadi savu talruna numuru:","Talruna ievade",JOptionPane.INFORMATION_MESSAGE);
-			}while(!Pattern.matches("^[2]{1}[0-9]{7}$", tlf));
-			klienti klients=new klienti(vards,tlf,adrese[(int) attalums]);
+			picas pica=new picas(pizza[izvele],cena,5);
 			picas izveles = pieejamasPicas[izvele];
 			sefs sefs = new sefs(izveles,this);
 			sefs.start();
-			ierakstit(izveles);
+			ierakstit(klients);//izveidot picas objektu lai var ievietot
 			break;
 			///////////////
 			case 1:
 			nolasit();
 			break;
-			
 			///////////////
 			case 2:
 				System.exit(0);
