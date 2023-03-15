@@ -8,7 +8,6 @@ public class Liebus_pica {
 	static int[] att={1,3,2,
 			3,1,3,2,
 			5,4,7};
-	
 	static String pasutit[]={"To-go/pasutijums", "Uz vietas"};
 	static String picas[]={"Siera","Tropiska","Studentu","Margarita","Galas","Asa","Peperoni"};
 	static String piedevas[]={"Siers","Bekons","Ananasi","Jalapeno","Zalumi"};
