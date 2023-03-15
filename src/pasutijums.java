@@ -1,9 +1,3 @@
-
-public class pasutijums {
-
-	public static void main(String[] args) {
-		
-
-	}
-
+public interface pasutijums{
+	public void picaIzcepta(picas pica);
 }
