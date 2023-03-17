@@ -2,6 +2,8 @@ import java.io.Serializable;
 
 public class klienti implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private String vards, tlf, adrese;
 
 	public klienti(String vards, String tlf, String adrese) {
@@ -34,11 +36,15 @@ public class klienti implements Serializable{
 	public void setAdrese(String adrese) {
 		this.adrese = adrese;
 	}
-	public String ierakstit(){
-		return "Klients: "+getVards()+" Nr. "+getTlf()+" Adrese: "+getAdrese();
-	}
+	/*
 	 @Override
 	    public String toString() {
 	        return "Klients: "+getVards()+" Nr. "+getTlf()+" Adrese: "+getAdrese();   
-	 }
+	 }*//*
+	 @Override
+	    public String toString() {
+	      //  return "Klients: "+getVards()+" Nr. "+getTlf()+" Adrese: "+getAdrese();   
+		 return new StringBuffer(" Klients: ").append(this.vards)
+	                .append("\n Nr: +371").append(this.tlf).append("\n Adrese: ").append(this.adrese).toString();
+	 }*/
 }

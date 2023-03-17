@@ -1,6 +1,9 @@
+import java.io.Serializable;
 
-public class picas {
-
+public class picas implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String nos;
 	private double cena;
 	private double ceplaiks;
@@ -29,8 +32,11 @@ public class picas {
 		this.ceplaiks = ceplaiks;
 	}
 	
-	public String ierakstit(){
-		return getNos()+", cena: "+getCena()+"€, cepsanas laiks: ‎"+getCeplaiks()+"min";
+	public String toString(){
+		//return getNos()+", cena: "+getCena()+"€, cepsanas laiks: ‎"+getCeplaiks()+"min";
+		 return new StringBuffer(" Pica: ").append(this.nos)
+	                .append("\n Cena: ").append(this.cena).append("€\n‎").toString();
+	    
 	}
 
 }
