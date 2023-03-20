@@ -13,7 +13,7 @@ import java.io.Writer;
 		
 		static void ierakstit(picas pica) {
 			Writer writer = null;
-			String str="";
+			str="";
 			try {
 				writer = new BufferedWriter(new FileWriter("ceks.txt",true));
 				str+="Pica "+pica.getNos()+"\nCena: "+pica.getCena()+"€‎";
@@ -60,7 +60,7 @@ import java.io.Writer;
 		
 		static void ierakstit(picas pica, klienti klients) {
 			Writer writer = null;
-			String str="";
+			str="";
 			try {
 				writer = new BufferedWriter(new FileWriter("ceks.txt",true));
 				str+="Pica "+pica.getNos()+"\nCena: "+pica.getCena()+"€‎";
@@ -136,7 +136,7 @@ import java.io.Writer;
 		String vards="";
 		double cena = 0, attalums=0, laiks = 0;
 		String metodes[]= {"Pasutit","Apskatit cekus","Aizvert"};
-		picas p = null,p1 = null,p2 = null,p3 = null,p4 = null,p5 = null,p6 = null;
+		
 		String pizza[]={"Siera","Tropiska","Studentu","Margarita","Galas","Asa","Peperoni"};
 		String izmers[]= {"Maza 3.50€‎","Videja 5€‎","Liela 6.50€‎"};
 		String pasutit[]={"Uz vietas","Pasutijums"};
@@ -183,6 +183,14 @@ import java.io.Writer;
 			}else if(izvele==2) {
 				cena+=6.50;
 			}
+			izvele = JOptionPane.showOptionDialog(null,"Picas izvele","Izvelies picu",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,pizza,pizza[0]);
+			if(izvele==0||izvele==4||izvele==6){
+				laiks=5;
+			}else if(izvele==1||izvele==2){
+				laiks=2;
+			}else {
+				laiks=7;
+			}
 			pie="";
 			do{
 				izvele=JOptionPane.showOptionDialog(null,"Picas piedevu izvele","Izvelies piedevas",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,piedevas,piedevas[0]);
@@ -211,14 +219,7 @@ import java.io.Writer;
 					cena+=0.5;
 				}
 			}while(izvele!=0);
-			izvele = JOptionPane.showOptionDialog(null,"Picas izvele","Izvelies picu",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,pizza,pizza[0]);
-			if(izvele==0||izvele==4||izvele==6){
-				laiks=5;
-			}else if(izvele==1||izvele==2){
-				laiks=2;
-			}else {
-				laiks=7;
-			}
+			
 			
 			pica.setNos(pizza[izvele]);
 			pica.setCena(cena);
