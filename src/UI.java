@@ -220,20 +220,11 @@ import java.io.Writer;
 				laiks=7;
 			}
 			
-			p=new picas("Siera",cena,laiks);
-			p1=new picas("Tropiska",cena,laiks);
-			p2=new picas("Studentu",cena,laiks);
-			p3=new picas("Margarita",cena,laiks);
-			p4=new picas("Galas",cena,laiks);
-			p5=new picas("Asa",cena,laiks);
-			p6=new picas("Peperoni",cena,laiks);
-			picas[] pieejamasPicas=new picas[] {p,p1,p2,p3,p4,p5,p6};
-			
 			pica.setNos(pizza[izvele]);
 			pica.setCena(cena);
 			pica.setCeplaiks(laiks);
 			pica=new picas(pizza[izvele],cena,laiks);
-			picas izveles = pieejamasPicas[izvele];
+			picas izveles = pica;
 			sefs sefs = new sefs(izveles,this);
 			sefs.start();
 			if(klients==null){
