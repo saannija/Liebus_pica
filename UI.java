@@ -1,5 +1,3 @@
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,10 +5,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 	
 	public class UI implements pasutijums{
-		static String izm="",mer="",pie="", str="";
-		
+		static String izm="", pie="", mer="", str="";
 		static void ierakstit(picas pica) {
 			Writer writer = null;
 			String str="";
@@ -108,7 +107,9 @@ import java.io.Writer;
 			
 		}
 		
-		static void nolasit(){
+		static String nolasit(){
+			
+			
 			String txt, str="";
 			try{
 				FileReader fr=new FileReader("ceks.txt");
@@ -122,13 +123,13 @@ import java.io.Writer;
 			}catch(Exception e){
 				JOptionPane.showMessageDialog(null, "Kluda nolasot failu","Kluda",JOptionPane.WARNING_MESSAGE);
 			}
+			return str;
 		}
 		
 	public static void main(String[] args) {
 		UI ui=new UI();
 		ui.prompt();
 	 }
-	
 	public void prompt(){
 		File file = new File("ceks.txt");
 		int izvele,iz;
@@ -155,6 +156,7 @@ import java.io.Writer;
 			izvele=JOptionPane.showOptionDialog(null,"Pasutijuma izvele","Izvelies kur edisi",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,pasutit,pasutit[0]);
 			if(izvele==0) {
 				cena=0;
+				
 			}else if(izvele==1) {
 				vards=(String)JOptionPane.showInputDialog(null, "Ievadi pasutitaja vardu: ","Varda ievade",JOptionPane.INFORMATION_MESSAGE);
 				do {
@@ -168,7 +170,7 @@ import java.io.Writer;
 				}else if(attalums==2||attalums==6) {
 					cena+=attalums+2;
 				}else if(attalums==9) {
-					cena+=attalums+4;
+					cena+=attalums+2;
 				}else{
 					cena+=0;
 				}
@@ -182,6 +184,8 @@ import java.io.Writer;
 				cena+=5;
 			}else if(izvele==2) {
 				cena+=6.50;
+			}else{
+				cena+=0;
 			}
 			pie="";
 			do{
@@ -200,7 +204,6 @@ import java.io.Writer;
 					cena+=0;
 				}
 			}while(izvele!=0);
-			
 			mer="";
 			do{
 				izvele=JOptionPane.showOptionDialog(null,"Picas merces izvele 0.5€‎","Izvelies merci",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,merces,merces[0]);
@@ -239,7 +242,7 @@ import java.io.Writer;
 			if(klients==null){
 				ierakstit(pica);
 			}else{
-				ierakstit(pica, klients);//izveidot picas objektu lai var ievietot
+				ierakstit(pica, klients);
 			}
 			break;
 			///////////////
@@ -249,6 +252,7 @@ import java.io.Writer;
 				}else{
 					JOptionPane.showMessageDialog(null, "Nav veikts neviens pasutijums","Warning",JOptionPane.WARNING_MESSAGE);
 				}
+					
 			break;
 			///////////////
 			case 2:
@@ -260,6 +264,6 @@ import java.io.Writer;
 	}
 	
 	public void picaIzcepta(picas pica){
-		JOptionPane.showMessageDialog(null, pica.getNos()+" pica ir izcepta, cena "+pica.getCena()+"€\n");//\n Klients: "+klients.getVards()+" Nr. "+klients.getTlf()+" Adrese: "+klients.getAdrese());
-	}
+		JOptionPane.showMessageDialog(null, pica.getNos()+" pica ir izcepta, cena "+pica.getCena()+"€\n");
+		}
 }

@@ -31,7 +31,6 @@ public class picas implements Serializable{
 	public void setCeplaiks(double ceplaiks) {
 		this.ceplaiks = ceplaiks;
 	}
-	
 	public String ierakstit() {
 		 return "Pica "+getNos()+"\nCena: "+getCena()+"€\n‎";
 	}

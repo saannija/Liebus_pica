@@ -39,4 +39,5 @@ public class klienti implements Serializable{
 	public String ierakstit() {
 		return "Klients: "+getVards()+"\nAdrese: "+getAdrese()+"\nNr. +371"+getTlf();
 	}
+	
 }
