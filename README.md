@@ -9,7 +9,7 @@ Java projekts, kurš realizē picas pasūtīšanu :octocat:
 Pasūtit picu uz vietas/to go.
 Ja izvēlies pasūtīt picu ir izvēle uz kuru Liepājas rajonu vēlies pasūtīt un ievadīt savu vārdu un tālruni :telephone_receiver:.
 Izvēlēties kādas un cik piedevas/mērces :tomato: vēlies ar picu.
-Izvēlēties kādu picu vēlies no saraksta. :pizza:
+Izvēlēties kādu un cik lielu picu vēlies no saraksta. :pizza:
 Saņemt paziņojumu, kad pica ir gatava. 
 Apskatīt čekus no iepriekš pasūtītajām picām.
 
