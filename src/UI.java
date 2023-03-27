@@ -1,5 +1,3 @@
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,14 +5,24 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 	
 	public class UI implements pasutijums{
-		static String izm="",mer="",pie="", str="";
+		static String izm="",mer="",pie="", str="", dzer="", uzk="";
+		static int count=0;
 		
 		static void ierakstit(picas pica) {
+			count++;
 			Writer writer = null;
 			str="";
 			try {
+				if(count>5){
+					writer = new BufferedWriter(new FileWriter("ceks.txt"));
+					writer.flush();
+					count=0;
+					ierakstit(pica);
+				}else{
 				writer = new BufferedWriter(new FileWriter("ceks.txt",true));
 				str+="Pica "+pica.getNos()+"\nCena: "+pica.getCena()+"€‎";
 				str+="\nIzmers: "+izm;
@@ -24,7 +32,7 @@ import java.io.Writer;
 					StringBuilder sb = new StringBuilder();
 					for(int i=0; i<strArray.length; i++) {
 					  sb.append(strArray[i]);      
-					  if(i%2!=0) {
+					  if(i%2!=0||i/2!=0) {
 					    sb.append(",");
 					  }
 					  sb.append(" ");
@@ -47,9 +55,39 @@ import java.io.Writer;
 					
 						str+=sb.toString();
 				}
-				//str+="\nKlients: "+klients.getVards()+"\nAdrese: "+klients.getAdrese()+"\nNr. +371"+klients.getTlf();
+				if(dzer!="") {
+					str+="\nDzerieni: ";
+					String[] strArray = dzer.split(" ");
+					StringBuilder sb = new StringBuilder();
+					for(int i=0; i<strArray.length; i++) {
+					  sb.append(strArray[i]);      
+					  if(i%2!=0) {
+					    sb.append(",");
+					  }
+					  sb.append(" ");
+					}
+					sb.deleteCharAt(sb.length() - 1);
+					
+						str+=sb.toString();
+				}
+				if(uzk!="") {
+					str+="\nUzkodas: ";
+					String[] strArray = uzk.split(" ");
+					StringBuilder sb = new StringBuilder();
+					for(int i=0; i<strArray.length; i++) {
+					  sb.append(strArray[i]);      
+					  if(i%2!=0) {
+					    sb.append(",");
+					  }
+					  sb.append(" ");
+					}
+					sb.deleteCharAt(sb.length() - 1);
+					
+						str+=sb.toString();
+				}
 				str+="\n----------------\n";
 			writer.write(str);
+				}
 			} catch (IOException e) {
 			    e.printStackTrace();
 			} finally {
@@ -60,8 +98,15 @@ import java.io.Writer;
 		
 		static void ierakstit(picas pica, klienti klients) {
 			Writer writer = null;
+			count++;
 			str="";
 			try {
+				if(count>5){
+					writer = new BufferedWriter(new FileWriter("ceks.txt"));
+					writer.flush();
+					count=0;
+					ierakstit(pica,klients);
+				}else{
 				writer = new BufferedWriter(new FileWriter("ceks.txt",true));
 				str+="Pica "+pica.getNos()+"\nCena: "+pica.getCena()+"€‎";
 				str+="\nIzmers: "+izm;
@@ -95,11 +140,42 @@ import java.io.Writer;
 					sb.deleteCharAt(sb.length() - 1);
 					
 						str+=sb.toString();
-				
+				}
+
+				if(dzer!="") {
+					str+="\nDzerieni: ";
+					String[] strArray = dzer.split(" ");
+					StringBuilder sb = new StringBuilder();
+					for(int i=0; i<strArray.length; i++) {
+					  sb.append(strArray[i]);      
+					  if(i%2!=0) {
+					    sb.append(",");
+					  }
+					  sb.append(" ");
+					}
+					sb.deleteCharAt(sb.length() - 1);
+					
+						str+=sb.toString();
+				}
+				if(uzk!="") {
+					str+="\nUzkodas: ";
+					String[] strArray = uzk.split(" ");
+					StringBuilder sb = new StringBuilder();
+					for(int i=0; i<strArray.length; i++) {
+					  sb.append(strArray[i]);      
+					  if(i%2!=0) {
+					    sb.append(",");
+					  }
+					  sb.append(" ");
+					}
+					sb.deleteCharAt(sb.length() - 1);
+					
+						str+=sb.toString();
 				}
 				
 				str+="\n----------------\n";
 			writer.write(str);
+				}
 			} catch (IOException e) {
 			    e.printStackTrace();
 			} finally {
@@ -121,8 +197,8 @@ import java.io.Writer;
 				
 			}catch(Exception e){
 				JOptionPane.showMessageDialog(null, "Kluda nolasot failu","Kluda",JOptionPane.WARNING_MESSAGE);
-			}
 		}
+	 }
 		
 	public static void main(String[] args) {
 		UI ui=new UI();
@@ -145,6 +221,8 @@ import java.io.Writer;
 				"Dienvdrietumi","Ezerkrasts","Arpus pilsetas","Pie veikala"};
 		String piedevas[]={"Next","Siers 0.5€‎","Bekons 0.75€‎‎","Ananasi 0.75€‎","Jalapeno 0.5€‎","Zalumi 0.5€‎"};
 		String merces[]={"Next","BBQ","Ranch","Kecups","Saldskaba","Asa"};
+		String dzerieni[]={"Next","Coca-cola","Sprite","Fanta","Udens"};
+		String uzkodas[]={"Next","Fri","Siera bumbinas","Salati"};
 		klienti klients=null;
 		/////////////////
 		do{
@@ -155,6 +233,7 @@ import java.io.Writer;
 			izvele=JOptionPane.showOptionDialog(null,"Pasutijuma izvele","Izvelies kur edisi",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,pasutit,pasutit[0]);
 			if(izvele==0) {
 				cena=0;
+				klients=null;
 			}else if(izvele==1) {
 				vards=(String)JOptionPane.showInputDialog(null, "Ievadi pasutitaja vardu: ","Varda ievade",JOptionPane.INFORMATION_MESSAGE);
 				do {
@@ -184,6 +263,8 @@ import java.io.Writer;
 				cena+=6.50;
 			}
 			izvele = JOptionPane.showOptionDialog(null,"Picas izvele","Izvelies picu",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,pizza,pizza[0]);
+			nos=pizza[izvele];
+			pica.setNos(nos);
 			if(izvele==0||izvele==4||izvele==6){
 				laiks=5;
 			}else if(izvele==1||izvele==2){
@@ -191,6 +272,7 @@ import java.io.Writer;
 			}else {
 				laiks=7;
 			}
+			
 			pie="";
 			do{
 				izvele=JOptionPane.showOptionDialog(null,"Picas piedevu izvele","Izvelies piedevas",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,piedevas,piedevas[0]);
@@ -220,18 +302,38 @@ import java.io.Writer;
 				}
 			}while(izvele!=0);
 			
+			dzer="";
+			do{
+				izvele=JOptionPane.showOptionDialog(null, "Dzeriena izvele 1.5€‎", "Dzerieni", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, dzerieni, dzerieni[0]);
+			if(izvele==0){
+				cena+=0;
+			}else{
+				dzer+=dzerieni[izvele]+" ";
+				cena+=1.5;
+			}
+			}while(izvele!=0);
 			
-			pica.setNos(pizza[izvele]);
+			uzk="";
+			do{
+				izvele=JOptionPane.showOptionDialog(null, "Uzkodu izvele 2€‎", "Uzkodas", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, uzkodas, uzkodas[0]);
+			if(izvele==0){
+				cena+=0;
+			}else{
+				uzk+=uzkodas[izvele]+" ";
+				cena+=2;
+			}
+			}while(izvele!=0);
+			
 			pica.setCena(cena);
 			pica.setCeplaiks(laiks);
-			pica=new picas(pizza[izvele],cena,laiks);
+			pica=new picas(nos,cena,laiks);
 			picas izveles = pica;
 			sefs sefs = new sefs(izveles,this);
 			sefs.start();
 			if(klients==null){
 				ierakstit(pica);
 			}else{
-				ierakstit(pica, klients);//izveidot picas objektu lai var ievietot
+				ierakstit(pica, klients);
 			}
 			break;
 			///////////////
@@ -246,7 +348,6 @@ import java.io.Writer;
 			case 2:
 				System.exit(0);
 			break;
-			//default: System.exit(0);
 			}
 		}while(iz!=2);
 	}

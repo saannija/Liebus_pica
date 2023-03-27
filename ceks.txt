@@ -1,18 +1,8 @@
 Pica Studentu
-Cena: 4.5€‎
-Izmers: Maza 3.50€‎
-Piedevas: Siers 0.5€‎ 
-Merces: Ranch,
-----------------
-Pica Siera
-Cena: 7.25€‎
-Izmers: Videja 5€‎
-Piedevas: Bekons 0.75€‎‎, Siers 0.5€‎ 
-Merces: Kecups BBQ,
-----------------
-Pica Siera
-Cena: 6.0€‎
+Cena: 11.5€‎
 Izmers: Videja 5€‎
 Piedevas: Siers 0.5€‎ 
-Merces: BBQ
+Merces: Ranch BBQ,
+Dzerieni: Coca-cola Sprite,
+Uzkodas: Siera bumbinas,
 ----------------
