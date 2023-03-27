@@ -14,6 +14,6 @@ Saņemt paziņojumu, kad pica ir gatava.
 Apskatīt čekus no iepriekš pasūtītajām picām.
 
 ## Veicamie Darbi
-- [ ] Izveidot labāku čeku sarakstu (kad ir pārāk daudz pasūtījumi, pēdējos nevar redzēt)
-- [ ] "Sakopt kodu"
-- [ ] Ieviest iespēju izvēlēties dzērienu, uzkodas :beers::fries:
+- [x] Izveidot labāku čeku sarakstu (kad ir pārāk daudz pasūtījumi, pēdējos nevar redzēt)
+- [x] "Sakopt kodu"
+- [x] Ieviest iespēju izvēlēties dzērienu, uzkodas :beers::fries:
