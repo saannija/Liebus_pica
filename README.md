@@ -15,5 +15,6 @@ Apskatīt čekus no iepriekš pasūtītajām picām.
 
 ## Veicamie Darbi
 - [x] Izveidot labāku čeku sarakstu (kad ir pārāk daudz pasūtījumi, pēdējos nevar redzēt)
+- [x] Čeki izdzēšas, kad programmu iedarbina
 - [x] "Sakopt kodu"
 - [x] Ieviest iespēju izvēlēties dzērienu, uzkodas :beers::fries:
