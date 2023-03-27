@@ -18,9 +18,7 @@ import javax.swing.JOptionPane;
 			str="";
 			try {
 				if(count>5){
-					writer = new BufferedWriter(new FileWriter("ceks.txt"));
-					writer.flush();
-					count=0;
+					flushh();
 					ierakstit(pica);
 				}else{
 				writer = new BufferedWriter(new FileWriter("ceks.txt",true));
@@ -95,16 +93,28 @@ import javax.swing.JOptionPane;
 			}
 			
 		}
-		
+		static void flushh(){
+			Writer writer = null;
+			try {
+				writer = new BufferedWriter(new FileWriter("ceks.txt"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				writer.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		static void ierakstit(picas pica, klienti klients) {
 			Writer writer = null;
 			count++;
 			str="";
 			try {
 				if(count>5){
-					writer = new BufferedWriter(new FileWriter("ceks.txt"));
-					writer.flush();
-					count=0;
+					flushh();
 					ierakstit(pica,klients);
 				}else{
 				writer = new BufferedWriter(new FileWriter("ceks.txt",true));
@@ -201,6 +211,7 @@ import javax.swing.JOptionPane;
 	 }
 		
 	public static void main(String[] args) {
+		flushh();
 		UI ui=new UI();
 		ui.prompt();
 	 }
